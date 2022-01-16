@@ -1,16 +1,22 @@
 {
-  "name": "speedlimit",
+  "name": "fitbit-full-example",
   "version": "0.1.0",
   "private": true,
   "license": "UNLICENSED",
   "devDependencies": {
     "@fitbit/sdk": "~6.0.2",
-    "@fitbit/sdk-cli": "^1.7.3"
+    "@fitbit/sdk-cli": "^1.7.3",
+    "eslint": "^7.0.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.25.1",
+    "eslint-plugin-react": "^7.26.1",
+    "husky": "^7.0.2",
+    "lint-staged": "^11.2.3",
+    "prettier": "^2.4.1"
   },
   "fitbit": {
-    "appUUID": "7a4da7c2-a655-405c-a9e0-0bc30fc4da61",
     "appType": "app",
-    "appDisplayName": "Speedlimit",
+    "appDisplayName": "Fitbit Full Example",
     "iconFile": "resources/icon.png",
     "wipeColor": "#ffffff",
     "requestedPermissions": [],
@@ -19,10 +25,16 @@
       "vulcan"
     ],
     "i18n": {},
-    "defaultLanguage": "en-US"
+    "defaultLanguage": "en-US",
+    "appUUID": "4f102336-12a8-45f8-a6c9-e96c27f3bff5"
   },
   "scripts": {
     "build": "fitbit-build",
-    "debug": "fitbit"
+    "debug": "fitbit",
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "*.{js,jsx}": "eslint --cache --fix",
+    "*.{js,css,md}": "prettier --write"
   }
 }
