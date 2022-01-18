@@ -1,2 +1,23 @@
 msgid "hello_world"
 msgstr "Hallo wereld"
+
+msgid "remember_vehicle"
+msgstr "Onthoud voertuig"
+
+msgid "car"
+msgstr "auto"
+
+msgid "truck"
+msgstr "vrachtwagen"
+
+msgid "both"
+msgstr "beide"
+
+msgid "alert"
+msgstr "Alert"
+
+msgid "short"
+msgstr "kort"
+
+msgid "long"
+msgstr "lang"

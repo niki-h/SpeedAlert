@@ -1,7 +1,7 @@
 import document from 'document';
 import { getLocationName } from '../commands';
 import { getStateItem, setStateCallback, removeStateCallback } from '../state';
-import { gettext } from "i18n";
+import { gettext } from 'i18n';
 
 let $button = null;
 let $locationName = null;

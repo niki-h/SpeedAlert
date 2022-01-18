@@ -1,2 +1,2 @@
-msgid "welcome"
-msgstr "Welcome!"
+msgid "Choose"
+msgstr "Choose your vehicle"

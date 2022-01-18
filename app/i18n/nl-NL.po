@@ -1,2 +1,2 @@
-msgid "welcome"
-msgstr "Welkom!"
+msgid "Choose"
+msgstr "Kies uw voertuig"

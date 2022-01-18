@@ -1,2 +1,23 @@
 msgid "hello_world"
 msgstr "Hello world!"
+
+msgid "remember_vehicle"
+msgstr "Remember vehicle"
+
+msgid "car"
+msgstr "car"
+
+msgid "truck"
+msgstr "truck"
+
+msgid "both"
+msgstr "both"
+
+msgid "alert"
+msgstr "Alert"
+
+msgid "short"
+msgstr "short"
+
+msgid "long"
+msgstr "long"

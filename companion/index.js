@@ -4,18 +4,18 @@ import { settingsStorage } from 'settings';
 import * as messaging from 'messaging';
 import { geolocation } from 'geolocation';
 import { API_KEY } from './keys';
+import { API_KEYY } from './keys';
 
 /* Settings */
 function sendSettings() {
   const settings = {
-    items: settingsStorage.getItem('items')
-      ? JSON.parse(settingsStorage.getItem('items')).map((item) => ({
-          name: item.name ? JSON.parse(item.name).name : '',
-          letter: item.letter ? JSON.parse(item.letter).value : '',
-          color: item.color ? JSON.parse(item.color) : '',
-        }))
+    list: settingsStorage.getItem('alert')
+      ? JSON.parse(settingsStorage.getItem('alert')).map((item) => item.value)
       : [],
-    list: settingsStorage.getItem('list')
+    soortalert: settingsStorage.getItem('soortalert')
+      ? JSON.parse(settingsStorage.getItem('soortalert')).values[0].value
+      : '',
+    alert: settingsStorage.getItem('list')
       ? JSON.parse(settingsStorage.getItem('list')).map((item) => item.value)
       : [],
     letter: settingsStorage.getItem('letter')
@@ -60,9 +60,9 @@ async function fetchLocationName(coords) {
   let location = '';
   json.features.forEach((feature) => {
     if (
-      !location &&
-      (feature.place_type[0] === 'locality' ||
-        feature.place_type[0] === 'place')
+      !location /*feature.place_type[0] === 'locality' ||
+        feature.place_type[0] === 'place' ||*/ &&
+      feature.place_type[0] === 'address'
     ) {
       location = feature.text;
     }
@@ -75,8 +75,21 @@ async function fetchLocationName(coords) {
 }
 
 /* Location functions */
+var watchID = geolocation.watchPosition(locationSuccess, locationError, {
+  timeout: 60 * 1000,
+});
+
+/*API Fetch snap to road*/
+async function getLimits(points) {
+  const url = `https://dev.virtualearth.net/REST/v1/Routes/SnapToRoadAsync?points=${points}&interpolate=true&includeSpeedLimit=true&includeTruckSpeedLimit=false&speedUnit=MPH&travelMode=driving&key=${API_KEYY}`;
+  console.log(url);
+  const response = await fetch(url);
+  console.log(response);
+}
+
 function locationSuccess(location) {
   fetchLocationName(location.coords);
+  getLimits(location.coords.longitude + ',' + location.coords.latitude);
 }
 
 function locationError(error) {

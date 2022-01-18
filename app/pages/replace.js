@@ -1,47 +1,38 @@
 import document from 'document';
-import { switchPage } from '../navigation';
+import { getLocationName } from '../commands';
 import { getStateItem, setStateCallback, removeStateCallback } from '../state';
+import { gettext } from 'i18n';
 
 let $button = null;
-let $letter = null;
-let $timestamp = null;
+let $locationName = null;
 
 function doSomething() {
   console.log('hallo replace');
+  console.log(gettext('welcome'));
 }
 
 function draw() {
-  const letter = getStateItem('letter');
-  const timestamp = getStateItem('companionTimestamp');
-
-  $timestamp.text = timestamp;
-
-  if (letter) {
-    $letter.text = letter;
-  } else {
-    $letter.text = 'set letter';
-  }
+  $locationName.text = getStateItem('location');
 }
 
 export function destroy() {
   console.log('destroy replace page');
+  $locationName = null;
   $button = null;
-  $letter = null;
-  $timestamp = null;
   removeStateCallback('replace');
 }
 
 export function init() {
   console.log('init replace page');
-  $letter = document.getElementById('letter');
-  $timestamp = document.getElementById('timestamp');
+  $locationName = document.getElementById('location');
   $button = document.getElementById('back-button');
   $button.onclick = () => {
     destroy();
-    switchPage('index');
+    document.history.back();
   };
 
-  setStateCallback('replace', draw);
   doSomething();
-  draw();
+  getLocationName();
+  setStateCallback('replace', draw);
+  // draw();
 }
